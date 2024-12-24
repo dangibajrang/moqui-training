@@ -38,50 +38,76 @@
 
 <!--            <service-call name="create#MoquiTraining" in-map="context"/>-->
         </actions>
+
     </service>
+
+
+
+<!--    find-->
+
+    <service verb="find"
+             noun="TrainingData">
+    <in-parameters>
+        <parameter name="trainingId" />
+
+
+    </in-parameters>
+    <out-parameters>
+        <parameter name="trainingInfo" type="list" />
+    </out-parameters>
+        <actions>
+            <entity-find entity-name="MoquiTraining" list="trainingInfo">
+                <econdition field-name="trainingName"/>
+                <select-field field-name="trainingName , trainingId,trainingDate"/>
+            </entity-find>
+        </actions>
+    </service>
+
+
+
+
+
+
+
+<!--create/update-->
+
+
+    <service verb="store" noun="MoquiTrainingUpdate">
+        <in-parameters>
+
+            <auto-parameters entity-name="MoquiTraining" include="nonpk"/>
+            <parameter name="trainingName" required="true"/>
+            <parameter name="trainingDate"  type ="Timestamp" format="MM/dd"/>
+
+        </in-parameters>
+        <out-parameters>
+            <parameter name="trainingId"/>
+        </out-parameters>
+        <actions>
+            <!-- Check if the record exists -->
+            <entity-find entity-name="MoquiTraining" list="tutorialList">
+                <econdition field-name="trainingName" ignore-case="true"/>
+            </entity-find>
+
+            <if condition="tutorialList">
+      <!--   Record already exists , update with new values             -->
+            <then>
+                <set field="tutorial" from="tutorialList.first"/>
+                <entity-set value-field="tutorial" map="context"/>
+                <entity-update value-field="tutorial"/>
+                <set field="trainingId" from="tutorial.trainingId"/>
+            </then>
+       <!--      create new record          -->
+                <else>
+                    <service-call name="create#MoquiTraining" in-map="context" out-map="context"/>
+                </else>
+            </if>
+        </actions>
+    </service>
+
+
+
+
+
 </services>
-
-
-
-<!--<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-<!--          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.0.xsd">-->
-<!--    <service name="moquiTraining.createWithValidation"-->
-<!--             type="simple"-->
-<!--             require-authentication="false">-->
-<!--        <description>Create a MoquiTraining record with validations</description>-->
-<!--        <in-parameters>-->
-<!--            <parameter name="trainingName" type="String" required="true"/>-->
-<!--            <parameter name="trainingDate" type="String" required="true"/>-->
-<!--            <parameter name="trainingPrice" type="BigDecimal"/>-->
-<!--            <parameter name="trainingDuration" type="Integer"/>-->
-<!--        </in-parameters>-->
-<!--        <actions>-->
-<!--            &lt;!&ndash; Validate trainingName &ndash;&gt;-->
-<!--            <if-empty field="trainingName">-->
-<!--                <return-error message="The field 'trainingName' is mandatory."/>-->
-<!--            </if-empty>-->
-
-<!--            &lt;!&ndash; Validate trainingDate format &ndash;&gt;-->
-<!--            <if-not-matches field="trainingDate" reg-ex="^(0[1-9]|1[0-2])/([0-2][0-9]|3[0-1])/\\d{4}$">-->
-<!--                <return-error message="The field 'trainingDate' must follow the format MM/dd/yyyy."/>-->
-<!--            </if-not-matches>-->
-
-<!--            &lt;!&ndash; Call entity-auto service &ndash;&gt;-->
-<!--            <service-call name="moquiTraining.create">-->
-<!--                <in-map>-->
-<!--                    <field name="trainingName"/>-->
-<!--                    <field name="trainingDate"/>-->
-<!--                    <field name="trainingPrice"/>-->
-<!--                    <field name="trainingDuration"/>-->
-<!--                </in-map>-->
-<!--                <out-map>-->
-<!--                    <field name="trainingId"/>-->
-<!--                </out-map>-->
-<!--            </service-call>-->
-<!--        </actions>-->
-<!--        <out-parameters>-->
-<!--            <parameter name="trainingId" type="String"/>-->
-<!--        </out-parameters>-->
-<!--    </service>-->
-<!--</services>-->
 
