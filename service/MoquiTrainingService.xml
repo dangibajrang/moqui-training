@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.0.xsd">
+
+    <service verb="create"
+             noun="MoquiTraining">
+        <in-parameters>
+            <auto-parameters entity-name="MoquiTraining" include="nonpk"/>
+            <parameter name="trainingId" required="true"/>
+            <parameter name="trainingName"  required="true"/>
+            <parameter name="trainingDate"  required="true"/>
+            <parameter name="trainingPrice" />
+            <parameter name="trainingDuration"/>
+
+        </in-parameters>
+        <out-parameters>
+            <parameter name="trainingId" />
+        </out-parameters>
+
+        <actions>
+            <script>
+<!--                import static org.moqui.util.ObjectUtilities.*-->
+<!--                import static org.moqui.util.CollectionUtilities.*-->
+<!--                import static org.moqui.util.StringUtilities.*-->
+<!--                import java.sql.Timestamp-->
+<!--                import java.sql.Time-->
+<!--                import java.time.*-->
+
+                if (true) {
+                ec.service.sync().name("create#MoquiTraining")
+                .parameters(context).call()
+
+                if (ec.message.hasError()) return
+                }
+                // make sure the last statement is not considered the return value
+                return;
+            </script>
+
+<!--            <service-call name="create#MoquiTraining" in-map="context"/>-->
+        </actions>
+    </service>
+</services>
+
+
+
+<!--<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.0.xsd">-->
+<!--    <service name="moquiTraining.createWithValidation"-->
+<!--             type="simple"-->
+<!--             require-authentication="false">-->
+<!--        <description>Create a MoquiTraining record with validations</description>-->
+<!--        <in-parameters>-->
+<!--            <parameter name="trainingName" type="String" required="true"/>-->
+<!--            <parameter name="trainingDate" type="String" required="true"/>-->
+<!--            <parameter name="trainingPrice" type="BigDecimal"/>-->
+<!--            <parameter name="trainingDuration" type="Integer"/>-->
+<!--        </in-parameters>-->
+<!--        <actions>-->
+<!--            &lt;!&ndash; Validate trainingName &ndash;&gt;-->
+<!--            <if-empty field="trainingName">-->
+<!--                <return-error message="The field 'trainingName' is mandatory."/>-->
+<!--            </if-empty>-->
+
+<!--            &lt;!&ndash; Validate trainingDate format &ndash;&gt;-->
+<!--            <if-not-matches field="trainingDate" reg-ex="^(0[1-9]|1[0-2])/([0-2][0-9]|3[0-1])/\\d{4}$">-->
+<!--                <return-error message="The field 'trainingDate' must follow the format MM/dd/yyyy."/>-->
+<!--            </if-not-matches>-->
+
+<!--            &lt;!&ndash; Call entity-auto service &ndash;&gt;-->
+<!--            <service-call name="moquiTraining.create">-->
+<!--                <in-map>-->
+<!--                    <field name="trainingName"/>-->
+<!--                    <field name="trainingDate"/>-->
+<!--                    <field name="trainingPrice"/>-->
+<!--                    <field name="trainingDuration"/>-->
+<!--                </in-map>-->
+<!--                <out-map>-->
+<!--                    <field name="trainingId"/>-->
+<!--                </out-map>-->
+<!--            </service-call>-->
+<!--        </actions>-->
+<!--        <out-parameters>-->
+<!--            <parameter name="trainingId" type="String"/>-->
+<!--        </out-parameters>-->
+<!--    </service>-->
+<!--</services>-->
+

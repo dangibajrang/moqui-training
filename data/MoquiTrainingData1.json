@@ -1,0 +1,49 @@
+[
+  {"_dataType":"demo"},
+  {
+    "_entity" : "tutorial.MoquiTraining",
+
+    "trainingId": "1",
+    "trainingName": "Java Basics",
+    "trainingDate": "2024-01-01",
+    "trainingPrice": 99.99,
+    "trainingDuration": 8
+  },
+  {
+    "_entity" : "tutorial.MoquiTraining",
+
+    "trainingId": "2",
+    "trainingName": "Advanced Python",
+    "trainingDate": "2024-02-15",
+    "trainingPrice": 149.99,
+    "trainingDuration": 12
+  },
+  {
+    "_entity" : "tutorial.MoquiTraining",
+
+    "trainingId": "3",
+    "trainingName": "Web Development Bootcamp",
+    "trainingDate": "2024-03-10",
+    "trainingPrice": 199.99,
+    "trainingDuration": 40
+  },
+  {
+    "_entity" : "tutorial.MoquiTraining",
+
+    "trainingId": "4",
+    "trainingName": "Data Science 101",
+    "trainingDate": "2024-04-20",
+    "trainingPrice": 129.99,
+    "trainingDuration": 20
+  },
+  {
+    "_entity" : "tutorial.MoquiTraining",
+
+
+    "trainingId": "5",
+    "trainingName": "Machine Learning Advanced",
+    "trainingDate": "2024-05-30",
+    "trainingPrice": 249.99,
+    "trainingDuration": 30
+  }
+]

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <entity-facade-xml type="demo">
-    <MoquiTraining  trainingName="ayush" trainingDate="23232" trainingPrice="2000" trainingDuration="3month"/>
+    <MoquiTraining  trainingId="13" trainingName="ayush" trainingDate="23232" trainingPrice="2000" trainingDuration="3month"/><MoquiTraining  trainingId="1" trainingName="ayush" trainingDate="23232" trainingPrice="2000" trainingDuration="3month"/>
+    <MoquiTraining  trainingId="10" trainingName="ayush" trainingDate="23232" trainingPrice="2000" trainingDuration="3month"/><MoquiTraining  trainingId="1" trainingName="ayush" trainingDate="23232" trainingPrice="2000" trainingDuration="3month"/>
+    <MoquiTraining  trainingId="11" trainingName="ayush" trainingDate="23232" trainingPrice="2000" trainingDuration="3month"/><MoquiTraining  trainingId="1" trainingName="ayush" trainingDate="23232" trainingPrice="2000" trainingDuration="3month"/>
+    <MoquiTraining  trainingId="12" trainingName="ayush" trainingDate="23232" trainingPrice="2000" trainingDuration="3month"/><MoquiTraining  trainingId="1" trainingName="ayush" trainingDate="23232" trainingPrice="2000" trainingDuration="3month"/>
+
 
 
 
