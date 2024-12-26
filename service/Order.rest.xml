@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="file://C:\Users\HP\OneDrive\Desktop\sandbox\moqui-framework\framework\xsd\rest-api-3.xsd"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd"
+          name="order" displayName="Order RestApi" version="2.0.0" >
+
+    <resource name="orders" require-authentication="anonymous-all">
+
+        <method type="get"><entity name="OrderItem"  operation="list"/></method>
+        <method type="post"   ><entity name="OrderItem" operation="create"/></method>
+        <id name="orderItemSeqId">
+
+            <method type="get"   ><entity name="OrderItem" operation="one"/></method>
+            <method type="delete"   ><entity name="OrderItem" operation="delete"/></method>
+            <method type="put"   ><entity name="OrderItem" operation="store"/></method>
+
+        </id>
+
+        <resource name="OrderHeader" require-authentication="anonymous-all">
+
+
+            <method type="post"> <entity name="OrderHeader" operation="create"/></method>
+
+        </resource>>
+    </resource>
+
+
+</resource>
