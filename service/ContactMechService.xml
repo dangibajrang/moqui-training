@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+
+    <service verb="create" noun="ContactMech">
+        <description>Add a contact mechanism for a specific party.</description>
+
+        <in-parameters>
+            <parameter name="partyId" required="true"/>
+            <parameter name="streetAddress" required="true"/>
+            <parameter name="city"/>
+            <parameter name="state"/>
+            <parameter name="postalCode"/>
+        </in-parameters>
+
+        <out-parameters>
+            <parameter name="contactMechId"/>
+        </out-parameters>
+        <actions>
+            <service-call name="create#ContactMech" in-map="context" out-map="context"/>
+
+        </actions>
+
+
+
+    </service>
+
+
+    <service verb="update" noun="ContactMech">
+        <description>Update a specific contact mechanism for a party.</description>
+
+        <in-parameters>
+            <parameter name="contactMechId" required="true"/>
+            <parameter name="partyId" required="true"/>
+            <parameter name="streetAddress"/>
+            <parameter name="city"/>
+            <parameter name="state"/>
+            <parameter name="postalCode"/>
+        </in-parameters>
+
+        <out-parameters>
+            <parameter name="success" type="boolean"/>
+            <parameter name="message" type="string"/>
+        </out-parameters>
+
+        <actions>
+            <!-- Find the existing Contact_Mech record -->
+            <entity-find-one entity-name="ContactMech" value-field="existingRecord">
+                <field-map field-name="contactMechId" from="contactMechId"/>
+            </entity-find-one>
+
+            <if condition="existingRecord">
+                <then>
+                    <!-- Update fields of the existing Contact_Mech record -->
+                    <set field="existingRecord.streetAddress" from="streetAddress"/>
+                    <set field="existingRecord.city" from="city"/>
+                    <set field="existingRecord.state" from="state"/>
+                    <set field="existingRecord.postalCode" from="postalCode"/>
+
+                    <!-- Perform the update -->
+                    <entity-update value-field="existingRecord"/>
+
+                    <!-- Set success output -->
+                    <set field="success" from="true"/>
+                    <set field="message" from="'Contact mechanism updated successfully.'"/>
+                </then>
+                <else>
+                    <!-- Set failure output -->
+                    <set field="success" from="false"/>
+                    <set field="message" from="'Contact mechanism not found.'"/>
+                </else>
+            </if>
+        </actions>
+    </service>
+
+
+
+</services>

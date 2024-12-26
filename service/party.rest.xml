@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="file://C:\Users\HP\OneDrive\Desktop\sandbox\moqui-framework\framework\xsd\rest-api-3.xsd"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd"
+          name="party" displayName="Party RestApi" version="2.0.0" >
+
+
+    <resource name="parties" require-authentication="anonymous-all">
+        <method type="get">
+            <entity name="Party" operation="list"/>
+        </method>
+        <method type="post"   ><service name="party.PartyService.create#Party"/></method>
+
+
+        <id name="partyId">
+            <method type="get">
+                <entity name="Party" operation="one"/>
+            </method>
+
+            <method type="delete">
+                <entity name="Party" operation="delete"/>
+            </method>
+
+            <method type="put">
+                <service name="party.PartyService.store#UpdateParty"/>
+            </method>
+
+        </id>
+
+
+
+        <id name="partyId">
+            <resource name="contacts" require-authentication="anonymous-all">
+                <id name="contactMechId">
+                    <!-- Update an existing contact mechanism -->
+                    <method type="put">
+                        <service name="ContactMechService.update#ContactMech"/>
+                    </method>
+                </id>
+
+            </resource>
+        </id>
+
+
+
+    </resource>
+
+
+
+
+
+</resource>
+
+<!--        C:\Users\HP\OneDrive\Desktop\sandbox\moqui-framework\framework\xsd\rest-api-3.xsd-->

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+
+
+
+    <service verb="create" noun="Party" type="entity-auto">
+        <in-parameters><auto-parameters entity-name="Party" include="nonpk"/>
+
+        </in-parameters>
+        <out-parameters><parameter name="partyId"/></out-parameters>
+    </service>
+
+
+
+    <service verb="store" noun="UpdateParty">
+        <description>Create or update Party records based on partyId.</description>
+
+        <in-parameters>
+            <parameter name="partyId" required="true"/>
+            <parameter name="partyType" required="true"/>
+            <parameter name="firstName"/>
+            <parameter name="lastName"/>
+            <auto-parameters entity-name="Party" include="nonpk"/>
+        </in-parameters>
+
+        <out-parameters>
+            <parameter name="partyId"/>
+        </out-parameters>
+
+        <actions>
+            <!-- Find existing Party record -->
+            <entity-find-one entity-name="Party" value-field="existingRecord">
+                <field-map field-name="partyId" from="partyId"/>
+            </entity-find-one>
+
+            <if condition="existingRecord">
+                <then>
+                    <!-- Update existing Party record -->
+                    <set field="existingRecord.partyType" from="partyType"/>
+                    <set field="existingRecord.firstName" from="firstName"/>
+                    <set field="existingRecord.lastName" from="lastName"/>
+
+                    <!-- Perform the update -->
+                    <entity-update value-field="existingRecord"/>
+
+                    <!-- Set output parameter -->
+                    <set field="partyId" from="existingRecord.partyId"/>
+                </then>
+                <else>
+                    <!-- Create a new Party record if it doesn't exist -->
+                    <service-call name="create#Party" in-map="context" out-map="context"/>
+                </else>
+            </if>
+        </actions>
+    </service>
+
+</services>
