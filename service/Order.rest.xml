@@ -4,25 +4,45 @@
           xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd"
           name="order" displayName="Order RestApi" version="2.0.0" >
 
+
+
+
     <resource name="orders" require-authentication="anonymous-all">
+        <method type="post">
+            <service name="OrderService.create#OrderHeader"/>
+        </method>
+        <id name="orderId">
+            <method type="get">
+                <service name="OrderService.find#OrderHeader"/>
+            </method>
+            <method type="patch">
+                <service name="OrderService.patch#OrderHeader"/>
+            </method>
+            <method type="delete">
+                <service name="OrderService.delete#OrderHeader"/>
+            </method>
 
-        <method type="get"><entity name="OrderItem"  operation="list"/></method>
-        <method type="post"   ><entity name="OrderItem" operation="create"/></method>
-        <id name="orderItemSeqId">
-
-            <method type="get"   ><entity name="OrderItem" operation="one"/></method>
-            <method type="delete"   ><entity name="OrderItem" operation="delete"/></method>
-            <method type="put"   ><entity name="OrderItem" operation="store"/></method>
+            <resource name="items" require-authentication="anonymous-all">
+                <method type="post">
+                    <service name="OrderService.create#OrderItem"/>
+                </method>
+            </resource>
 
         </id>
+    </resource>
 
-        <resource name="OrderHeader" require-authentication="anonymous-all">
+    <resource name="orderItem" require-authentication="anonymous-all">
 
+        <method type="get">
+            <entity name="OrderItem" operation="list"/>
+        </method>
+        <method type="delete">
+            <service name="OrderService.delete#OrderItem"/>
+        </method>
 
-            <method type="post"> <entity name="OrderHeader" operation="create"/></method>
-
-        </resource>>
     </resource>
 
 
 </resource>
+
+

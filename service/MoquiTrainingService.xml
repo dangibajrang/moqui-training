@@ -2,8 +2,7 @@
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.0.xsd">
 
-    <service verb="create"
-             noun="MoquiTraining">
+    <service verb="create" noun="MoquiTraining">
         <in-parameters>
             <auto-parameters entity-name="MoquiTraining" include="nonpk"/>
             <parameter name="trainingId" required="true"/>
@@ -11,8 +10,8 @@
             <parameter name="trainingDate"  required="true"/>
             <parameter name="trainingPrice" />
             <parameter name="trainingDuration"/>
-
         </in-parameters>
+
         <out-parameters>
             <parameter name="trainingId" />
         </out-parameters>
