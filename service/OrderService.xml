@@ -11,9 +11,24 @@
             <parameter name="orderId"/>
         </out-parameters>
         <actions>
-            <service-call name="delete#OrderItem" in-map="context" out-map="resultMp"/>
+
+            <entity-find-one entity-name="OrderHeader" value-field="orderHeaderRecord">
+                <field-map field-name="orderId" from="context.orderId"/>
+            </entity-find-one>
+
+
+            <if condition="orderHeaderRecord">
+
+                <entity-delete value-field="orderHeaderRecord"/>
+            </if>
+            <else>
+                <log message="OrderHeader record with orderId=${context.orderId} does not exist" level="warning"/>
+                <return message="No OrderHeader found with the given orderId" type="info"/>
+            </else>
         </actions>
     </service>
+
+
 
 
     <service verb="find" noun="OrderHeader">
@@ -44,7 +59,10 @@
             <entity-find entity-name="OrderItem" list="itemList">
                 <econdition field-name="orderId" from="context.orderId"/>
             </entity-find>
+
+
             <iterate list="itemList" entry="item">
+
                 <entity-delete value-field="item"/>
             </iterate>
         </actions>

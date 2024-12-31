@@ -9,7 +9,7 @@
         <method type="get">
             <entity name="tutorial.Party" operation="list"/>
         </method>
-        <method type="post"   ><service name="party.PartyService.create#Party"/></method>
+        <method type="post"><service name="party.PartyService.create#Party"/></method>
 
 
         <id name="partyId">

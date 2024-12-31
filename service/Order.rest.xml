@@ -16,7 +16,9 @@
                 <service name="OrderService.find#OrderHeader"/>
             </method>
             <method type="patch">
-                <service name="OrderService.patch#OrderHeader"/>
+
+                <entity name="OrderItem" operation="store"/>
+<!--                <service name="OrderService.patch#OrderHeader"/>-->
             </method>
             <method type="delete">
                 <service name="OrderService.delete#OrderHeader"/>
